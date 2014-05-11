@@ -1,3 +1,4 @@
+
 #gdg-django-lab
 
 ##Requisitos
@@ -10,3 +11,9 @@
 - Clone repositório
 - Crie virtualenv venv
 - Windows: activate .bat || Linux: activate
+
+
+
+
+
+
