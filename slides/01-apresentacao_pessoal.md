@@ -1,3 +1,9 @@
-##[+ErickMendonca](http://google.com/+ErickMendonca)
+##Erick Mendonça
 
-This presentation was created with the HTML Presentation Framework [reveal.js](https://github.com/hakimel/reveal.js/).
+[+ErickMendonça](http://google.com/+ErickMendonca)
+
+[erickmendonca.com.br](http://erickmendonca.com.br/)
+
+[erick@erickmendonca.com.br](mailto:erick@erickmendonca.com.br)
+
+E vocês?
