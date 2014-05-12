@@ -6,4 +6,9 @@
 
 [erick@erickmendonca.com.br](mailto:erick@erickmendonca.com.br)
 
-E vocês?
+~~sub-section~~
+
+##E vocês?
+
+- Onde trabalham e/ou estudam?
+- O que usam para desenvolver?
