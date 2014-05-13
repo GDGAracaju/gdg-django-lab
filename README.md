@@ -29,7 +29,7 @@
 		- Forms
 		- Admin
 		- Batteries included!
-- Ambiente de desenvolimento
+- Ambiente de desenvolvimento
 	- Desktop / Remoto
 - Hello World, Django
 	- Criando um projeto
