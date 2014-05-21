@@ -16,26 +16,10 @@
 
 ~~sub-section~~
 
-##Ambiente pronto!
+#Ambiente pronto!
 
-Vá ao terminal:
 
-```bash
-cd workspace/gdg-django-lab
-#git checkout v-1
-django-admin.py startproject gdg_pizza
-```
 
-Projeto criado :-)
 
-~~sub-section~~
 
-##Estrutura básica do projeto
 
-- gdg_pizza
-	- manage.py
-	- gdg_pizza
-		- \_\_init\_\_.py
-		- settings.py
-		- urls.py
-		- wsgi.py
