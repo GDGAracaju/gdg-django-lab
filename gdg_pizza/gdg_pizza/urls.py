@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, include, url
+import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', views.index, name='index')
     # Examples:
     # url(r'^$', 'gdg_pizza.views.home', name='home'),
     # url(r'^gdg_pizza/', include('gdg_pizza.foo.urls')),
