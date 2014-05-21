@@ -123,10 +123,14 @@ def index(request):
 
 ##Request Handlers
 
+São os responsáveis por tratar as requisições HTTP.
+
+Podem retornar HttpResponse, do pacote:
 ```python
 from django.http import HttpResponse
 ```
 
+E podem ser escritos da forma:
 ```python
 def index(request):
     return HttpResponse("Hello, world. You're at the index.")
@@ -136,6 +140,16 @@ def index(request):
 
 ##URL Conf
 
+> ["Cool URIs don't change"](http://www.w3.org/Provider/Style/URI), Tim Berners-Lee
+
+- URLs devem ser configuráveis
+- URLs não precisam mudar: estabilidade
+
+~~sub-section~~
+
+##URL Conf
+
+A configuração das URLs em Django podem ser feitas usando expressões regulares:
 ```python
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index')
@@ -147,3 +161,22 @@ urlpatterns = patterns('',
 ```python
 url(r'^$', views.index, name='index')
 ```
+
+- `url()`: método gerador da URL.
+- `r'^$'`: expressão regular para identificar a URL.
+- `views.index`: método que tratará desse endereço.
+- `name='index'`: nome da URL.
+
+~~sub-section~~
+
+##Expressões regulares
+
+- `r`: indica que a string não deve ter caracteres escapados.
+- `^`: começo da string.
+- `$`: fim da string.
+
+Então, `r'^$'` indentifica uma URL vazia! 
+
+Note: as URLs do Django já consideram o endereço básico da aplicação!
+
+~~sub-section~~
