@@ -86,3 +86,64 @@ Quit the server with CONTROL-C.
 
 ~~sub-section~~
 
+##Adicionando uma página simples (1)
+
+Edite o arquivo ```gdg_pizza\urls.py``` para incluir:
+
+```python
+from django.conf.urls import patterns, include, url
+import views
+
+urlpatterns = patterns('',
+    url(r'^$', views.index, name='index')
+)
+
+```
+
+~~sub-section~~
+
+##Adicionando uma página simples (2)
+
+Adicione o arquivo ```gdg_pizza\views.py``` com o código:
+
+```python
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the index.")
+```
+
+~~sub-section~~
+
+#Hello World!
+
+![Django](./img/screen_django_02.png "Django")
+
+~~sub-section~~
+
+##Request Handlers
+
+```python
+from django.http import HttpResponse
+```
+
+```python
+def index(request):
+    return HttpResponse("Hello, world. You're at the index.")
+```
+
+~~sub-section~~
+
+##URL Conf
+
+```python
+urlpatterns = patterns('',
+    url(r'^$', views.index, name='index')
+```
+~~sub-section~~
+
+##URL Patterns
+
+```python
+url(r'^$', views.index, name='index')
+```
