@@ -28,6 +28,12 @@
 
 ~~sub-section~~
 
+##Extra: [DojoPuzzles](http://dojopuzzles.com)
+
+![DojoPuzzles](./img/screen_dojopuzzles.png "Dojo Puzzles screenshot")
+
+~~sub-section~~
+
 #Mas o que é o Django?
 
 ~~sub-section~~
