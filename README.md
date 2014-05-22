@@ -39,7 +39,7 @@
 	- Request handlers
 	- URLConf
 	- URL patterns
-- Aprimoramentos
+- Projeto Simples
 	- Adicionando um modelo
 	- Banco de dados (configuração)
 	- Admin!
@@ -49,6 +49,7 @@
 	- Template
 		- Loops for, contador, primeiro e último
 		- Includes
+- Aprimoramentos
 	- Django shortcuts: get_object_or_404
 	- URL com parâmetros
 	- Autenticação
@@ -56,7 +57,7 @@
 	- Django forms
 		- Form.as_p
 		- Form.is_valid
--Publicação
+- Publicação
 	- Publicando no Heroku
 	- Publicando no App Engine
 	- Publicando em seu servidor
