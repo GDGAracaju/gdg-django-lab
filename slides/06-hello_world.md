@@ -178,5 +178,3 @@ url(r'^$', views.index, name='index')
 Então, `r'^$'` indentifica uma URL vazia! 
 
 Note: as URLs do Django já consideram o endereço básico da aplicação!
-
-~~sub-section~~
