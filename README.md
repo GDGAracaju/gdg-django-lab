@@ -1,4 +1,3 @@
-
 #gdg-django-lab
 
 ##Requisitos
