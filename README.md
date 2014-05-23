@@ -41,9 +41,9 @@
 - Projeto Simples
 	- Adicionando um modelo
 	- Banco de dados (configuração)
-	- Admin!
 	- Shell
 	- Banco de dados (utlização/API)
+	- Admin!
 	- Editando o admin (opções para modelos)
 	- Template
 		- Loops for, contador, primeiro e último
