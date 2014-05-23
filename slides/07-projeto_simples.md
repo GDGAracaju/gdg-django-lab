@@ -270,6 +270,8 @@ INSTALLED_APPS = (
 (...)
 ```
 
+~~sub-section~~
+
 E o `urls.py`:
 
 ```python
@@ -295,7 +297,8 @@ E no terminal:
 ./manage.py runserver 0.0.0.0:8080
 ```
 
-Agora abram o preview :-)
+Agora abram o preview e adicionem `/admin` à URL :-)
 
 ~~sub-section~~
 
+![Django Admin](./img/screen_django_admin.png "Django Admin")
