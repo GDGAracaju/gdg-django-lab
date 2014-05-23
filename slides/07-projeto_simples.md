@@ -234,12 +234,68 @@ class Product (models.Model):
 
 ~~sub-section~~
 
+##Mas e o banco de dados?
+
 Ao alterar nosso modelo, o `syncdb` não atualiza a tabela. 
 
 Podemos:
 
 - Recriá-la ou alterá-la manualmente. (lembre do `./manage.py sql cardapio`)
 - Usar um sistema de migrações, como o **South**.
+
+~~sub-section~~
+
+#Mas e o WebApp?
+
+Calma!
+
+~~sub-section~~
+
+##Django Admin
+
+Vamos editar nosso `settings.py`:
+
+```python
+(...)
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'cardapio',
+)
+(...)
+```
+
+E o `urls.py`:
+
+```python
+from django.conf.urls import patterns, include, url
+import views
+from django.contrib import admin
+
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    url(r'^$', views.index, name='index'),
+    url(r'^admin/', include(admin.site.urls)),
+)
+
+```
+
+~~sub-section~~
+
+E no terminal:
+
+```bash
+./manage.py syncdb
+./manage.py runserver 0.0.0.0:8080
+```
+
+Agora abram o preview :-)
 
 ~~sub-section~~
 
