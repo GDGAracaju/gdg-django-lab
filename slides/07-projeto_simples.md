@@ -302,3 +302,165 @@ Agora abram o preview e adicionem `/admin` à URL :-)
 ~~sub-section~~
 
 ![Django Admin](./img/screen_django_admin.png "Django Admin")
+
+~~sub-section~~
+
+##E em PT-BR?
+
+Editem o `settings.py`:
+```python
+(...)
+TIME_ZONE = 'America/Sao_Paulo'
+
+LANGUAGE_CODE = 'pt-br'
+(...)
+```
+
+~~sub-section~~
+
+##Mas e o app Cardápio?
+
+Crie um arquivo `admin.py` dentro do app:
+
+```python
+from django.contrib import admin
+from cardapio.models import Product
+
+admin.site.register(Product)
+```
+
+```bash
+./manage.py runserver
+```
+
+![Django Admin](./img/screen_django_admin_ptbr.png "Django Admin")
+
+~~sub-section~~
+
+##Vamos deixar o `/admin` mais legível?
+
+`models.py`
+
+```python
+# coding=UTF-8
+(...)
+class Product (models.Model):
+    name = models.CharField('nome', max_length=100)
+    price = models.DecimalField('preço', max_digits=6, decimal_places=2)
+    description = models.TextField('descrição', blank=True)
+    featured = models.BooleanField('destaque', default=False, blank=True)
+    pub_date = models.DateTimeField('data de publicação', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Produto'
+        verbose_name_plural = 'Produtos'
+        ordering = ['name']
+(...)
+```
+
+~~sub-section~~
+
+![Django Admin](./img/screen_django_admin_ptbr_2.png "Django Admin")
+
+~~sub-section~~
+
+##Pensem na quantidade de código que vocês não escreveram:
+
+- SELECT, INSERT, UPDATE, DELETE
+- Validação
+- Autenticação
+- URLs amigáveis
+
+E o Admin pode ser personalizado!
+
+~~sub-section~~
+
+##Organizando os campos exibidos no formulário
+
+Edite o `admin.py`:
+
+```python
+(...)
+class ProductAdmin(admin.ModelAdmin):
+    fields = ['featured', 'name','price']
+
+admin.site.register(Product, ProductAdmin)
+```
+
+~~sub-section~~
+
+##Organizando os campos em painéis
+
+```python
+(...)
+class ProductAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,       {'fields': ['name', 'featured']}),
+        ('Detalhes', {'fields': ['price', 'description']})
+    ]
+(...)
+```
+
+~~sub-section~~
+
+##Adicionando mais modelos
+
+Edite o `models.py`:
+
+```python
+(...)
+class Category(models.Model):
+    name = models.CharField(verbose_name='Nome', max_length=100,
+                            help_text='O nome da categoria')
+    created_on = models.DateTimeField(auto_now_add=True, 
+                            verbose_name='Criado em')
+    updated_on = models.DateTimeField(auto_now=True, 
+                            verbose_name='Atualizado em')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
+        ordering = ['name']
+
+class Product (models.Model):
+    category = models.ForeignKey(Category)
+(...)
+```
+
+~~sub-section~~
+
+E o `admin.py`:
+
+```python
+from django.contrib import admin
+from cardapio.models import Product, Category
+
+class ProductAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,       {'fields': ['category', 'name', 'featured']}),
+        ('Detalhes', {'fields': ['price', 'description']})
+    ]
+
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Category)
+```
+
+~~sub-section~~
+
+##Atualize tudo!
+
+```bash
+ psql -c "drop database gdg_pizza;"
+ psql -c "create database gdg_pizza;"
+
+ ./manage.py syncdb
+ ./manage.py runserver
+```
+
+E abra o Admin :-)
+
+~~sub-section~~
+
