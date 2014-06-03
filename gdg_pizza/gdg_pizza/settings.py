@@ -1,3 +1,4 @@
+import os
 # Django settings for gdg_pizza project.
 
 DEBUG = True
@@ -104,7 +105,10 @@ ROOT_URLCONF = 'gdg_pizza.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'gdg_pizza.wsgi.application'
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 TEMPLATE_DIRS = (
+	os.path.join(BASE_DIR, 'templates')
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
