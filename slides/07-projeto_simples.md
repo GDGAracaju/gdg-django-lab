@@ -1,12 +1,5 @@
 #Web App
 
-- HTML 5
-- Layout
-- Templates
-- Javascript
-- CSS
-- Responsividade
-
 ~~sub-section~~
 
 ##Criando um app
@@ -461,6 +454,185 @@ admin.site.register(Category)
 ```
 
 E abra o Admin :-)
+
+~~sub-section~~
+
+##Adicionando Produtos e Categorias
+
+Edite o `admin.py`:
+
+```python
+(...)
+class ProductsInline(admin.StackedInline):
+  model = Product
+  extra = 2
+  
+class CategoryAdmin(admin.ModelAdmin):
+  inlines = [ProductsInline]
+(...)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Category, CategoryAdmin)
+```
+
+~~sub-section~~
+
+![Django Admin](./img/screen_django_admin_ptbr_3.png "Django Admin")
+
+~~sub-section~~
+
+##Ordenando e filtrando no Admin
+
+Edite o `admin.py`:
+
+```python
+(...)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'price', 'featured')
+	list_filter = ['pub_date']
+	search_fields = ['name', 'description']
+(...)
+```
+
+E o `models.py`
+
+```python
+(...)
+class Product (models.Model):
+	category = models.ForeignKey(Category, verbose_name='Categoria')
+(...)
+	def was_published_recently(self):
+		return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+	was_published_recently.admin_order_field = 'pub_date'
+	was_published_recently.boolean = True
+	was_published_recently.short_description = 'Publicado recentemente?'
+(...)
+```
+
+~~sub-section~~
+
+![Django Admin](./img/screen_django_admin_ptbr_4.png "Django Admin")
+
+~~sub-section~~
+
+##Views
+
+- Uma view é um tipo de página em seu projeto, que corresponde a uma função de sua aplicação.
+- Cada página ou conteúdo no Django é servido como uma view.
+- Cada view corresponde a uma função/método.
+- O Django escolhe através da URL Conf.
+- Nós já temos uma view!
+
+~~sub-section~~
+
+##Escrevendo views
+
+Lembrem do `gdg_pizza\views.py`.
+
+```python
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the index.")
+```
+
+E do `urls.py`:
+
+```python
+from django.conf.urls import patterns, include, url
+import views
+
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    url(r'^$', views.index, name='index'),
+    url(r'^admin/', include(admin.site.urls)),
+)
+```
+
+~~sub-section~~
+
+##Criando uma view de um app
+
+Dentro de `cardapio`, edite `views.py`:
+
+```python
+#encoding=utf-8
+from django.http import HttpResponse
+
+def cardapio_index(request):
+    return HttpResponse("Olá! Bem vindo ao cardápio.")
+```
+
+E crie `urls.py`
+
+```python
+from django.conf.urls import patterns, url
+
+from polls import views
+
+urlpatterns = patterns('',
+    url(r'^$', views.cardapio_index, name='cardapio_index')
+)
+```
+
+~~sub-section~~
+
+##Incluindo URLs de apps
+
+Edite o `gdg_pizza\urls.py`:
+
+```python
+(...)
+urlpatterns = patterns('',
+    url(r'^$', views.index, name='index'),
+	url(r'^cardapio/', include('cardapio.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+)
+```
+
+Agora você pode acessar a URL `/cardapio` e quaisquer outras que adicionemos ao módulo `cardapio`!
+
+~~sub-section~~
+
+##Escrevendo mais views:
+
+Adicione mais algumas linhas no `cardapio/views.py`:
+
+```python
+(...)
+def detail(request, category_id):
+    return HttpResponse(u"Você está vendo detalhes da categoria %s." \
+						% category_id)
+
+def products(request, category_id):
+    return HttpResponse(u"Você está vendo a lista de produtos da categoria %s." \
+						% category_id)
+
+```
+
+E o `cardapio/urls.py`:
+
+```python
+(...)
+urlpatterns = patterns('',
+    url(r'^$', views.cardapio_index, name='cardapio_index'),
+	url(r'^(?P<category_id>\d+)/$', views.detail, name='detail'),
+	url(r'^(?P<category_id>\d+)/products/$', views.products, name='products'),
+)
+```
+
+~~sub-section~~
+
+##Views úteis!
+
+~~sub-section~~
+
+##Templates
+
+- Reusabilidade de layout
+- Personalização de apps
+- Facilita a geração de HTMLs
 
 ~~sub-section~~
 
