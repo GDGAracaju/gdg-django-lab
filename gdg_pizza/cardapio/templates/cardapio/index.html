@@ -1,0 +1,9 @@
+{% if latest_category_list %}
+    <ul>
+    {% for category in latest_category_list %}
+        <li><a href="/cardapio/{{ category.id }}/">{{ category.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma categoria disponível.</p>
+{% endif %}
