@@ -7,8 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),
-	url(r'^cardapio/', include('cardapio.urls')),
+	url(r'^', include('cardapio.urls', namespace='cardapio')),
     # Examples:
     # url(r'^$', 'gdg_pizza.views.home', name='home'),
     # url(r'^gdg_pizza/', include('gdg_pizza.foo.urls')),

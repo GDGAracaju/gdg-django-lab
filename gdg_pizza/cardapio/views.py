@@ -13,6 +13,3 @@ def cardapio_index(request):
 def detail(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
     return render(request, 'cardapio/detail.html', {'category': category})
-
-def products(request, category_id):
-    return HttpResponse(u"Você está vendo a lista de produtos da categoria %s." % category_id)
