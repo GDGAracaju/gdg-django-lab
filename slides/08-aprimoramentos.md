@@ -9,6 +9,18 @@
 
 ~~sub-section~~
 
+##Arquivos estáticos
+
+Em `settings.py` já temos a configuração de arquivos estáticos:
+
+```python
+STATIC_URL = '/static/'
+```
+
+
+
+~~sub-section~~
+
 ##Template do Admin
 
 Edite o `settings.py`:

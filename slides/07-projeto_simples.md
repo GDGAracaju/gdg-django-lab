@@ -799,3 +799,89 @@ Reescrevendo o template `detail.html`:
 
 ~~sub-section~~
 
+##Organizando
+
+Edite `gdg_pizza\urls.py`:
+
+```python
+urlpatterns = patterns('',
+    url(r'^', include('cardapio.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+)
+```
+
+Remova o `gdg_pizza\views.py`.
+
+Edite `cardapio\urls.py`:
+
+```python
+from django.conf.urls import patterns, url
+from cardapio import views
+
+urlpatterns = patterns('',
+    url(r'^$', views.cardapio_index, name='cardapio_index'),
+    url(r'^(?P<category_id>\d+)/$', views.detail, name='detail'),
+)
+```
+
+~~sub-section~~
+
+Aproveite e veja seu `cardapio\views.py`:
+
+```python
+#!/usr/bin/python
+# coding: UTF-8
+# Create your views here.
+from cardapio.models import Category
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+
+def cardapio_index(request):
+    latest_category_list = Category.objects.order_by('-created_on')[:5]
+    context = {'latest_category_list': latest_category_list}
+    return render(request, 'cardapio/index.html', context)
+
+def detail(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    return render(request, 'cardapio/detail.html', {'category': category})
+```
+
+~~sub-section~~
+
+##Removendo URLs fixas no código
+
+Essa linha no `index.html` fere a filosofia de que template e views devem ser desacoplados:
+
+```html
+<li><a href="/cardapio/{{ category.id }}/">{{ category.name }}</a></li>
+```
+
+Podemos mudar para:
+
+```html
+<li><a href="{% url 'detail' category.id %}">{{ category.name }}</a></li>
+```
+
+Pois nomeamos a URL em `urls.py` como 'detail':
+
+```python
+url(r'^(?P<category_id>\d+)/$', views.detail, name='detail'),
+```
+
+~~sub-section~~
+
+##Evitando conflitos com namespaces
+
+Edite o `gdg_pizza\urls.py`:
+
+```python
+(...)
+url(r'^', include('cardapio.urls', namespace='cardapio')),
+(...)
+```
+
+E edite o `index.html`:
+
+```html
+<li><a href="{% url 'cardapio:detail' category.id %}">{{ category.name }}</a></li>
+```
