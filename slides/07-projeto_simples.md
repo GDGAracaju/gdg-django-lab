@@ -626,6 +626,28 @@ urlpatterns = patterns('',
 
 ##Views úteis!
 
+`views.py`:
+
+```python
+def cardapio_index(request):
+    #pega os últimos 5 registros de Categoria, ordenados por 'created_on'
+    latest_category_list = Category.objects.order_by('-created_on')[:5]
+
+    #junta todos os resultados da lista com ',' entre eles
+    output = ', '.join([c.name for c in latest_category_list])
+
+    return HttpResponse(output)
+```
+
+E acessem `/cardapio`.
+
+~~sub-section~~
+
+![Django Views](./img/screen_django_view_01.png "Django Views")
+
+- Design misturado com código
+- Difícil manutenção
+
 ~~sub-section~~
 
 ##Templates
@@ -633,6 +655,147 @@ urlpatterns = patterns('',
 - Reusabilidade de layout
 - Personalização de apps
 - Facilita a geração de HTMLs
+
+~~sub-section~~
+
+##Criando templates
+
+Dentro de `cardapio`, crie a pasta `templates`.
+
+Por padrão, o Django procura por templates em vários locais. Esse é um deles!
+
+Crie o arquivo `index.html`:
+
+```html
+{% if latest_category_list %}
+    <ul>
+    {% for category in latest_category_list %}
+        <li>
+            <a href="/cardapio/{{ category.id }}/">{{ category.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma categoria disponível.</p>
+{% endif %}
+```
+
+~~sub-section~~
+
+##Usando templates nas views
+
+Edite o seu `views.py`:
+
+```python
+from django.template import RequestContext, loader
+(...)
+
+def cardapio_index(request):
+    template = loader.get_template('cardapio/index.html')
+    latest_category_list = Category.objects.order_by('-created_on')[:5]
+    context = RequestContext(request, {
+        'latest_category_list': latest_category_list,
+    })
+    return HttpResponse(template.render(context))
+```
+
+~~sub-section~~
+
+![Django Views](./img/screen_django_view_02.png "Django Views")
+
+- Linguagem simplificada
+- Existem algumas formas de controle:
+    - `if`, `for`
+    - `counters`
+    - `includes`
+- Fácil adaptação de layouts existentes
+
+~~sub-section~~
+
+##Atalho: `render()`
+
+É muito comum usar `HttpResponse`, `loader`, `RequestContext`. 
+
+Então o Django oferece um atalho:
+
+`views.py`:
+
+```python
+(...)
+from django.shortcuts import render
+
+def cardapio_index(request):
+    latest_category_list = Category.objects.order_by('-created_on')[:5]
+    context = {'latest_category_list': latest_category_list}
+    return render(request, 'cardapio/index.html', context)
+(...)
+```
+
+~~sub-section~~
+
+##Lançando um erro: 404
+
+`views.py`:
+
+```python
+def detail(request, category_id):
+    try:
+        category = Category.objects.get(pk=category_id)
+    except Category.DoesNotExist:
+        raise Http404
+    return render(request, 'cardapio/detail.html', {'category': category})
+```
+
+Por enquanto, crie `templates\detail.html` apenas com:
+
+```html
+{{ category }}
+```
+
+~~sub-section~~
+
+Válido:
+
+![Django Views](./img/screen_django_view_03.png "Django Views")
+
+Inválido:
+
+![404](./img/screen_django_404.png "404")
+
+~~sub-section~~
+
+##Atalho: `get_object_or_404()`
+
+Também é bem comum tentar pegar um objeto no banco de dados e lançar um erro caso não o encontre.
+
+Então temos mais um atalho do Django!
+
+Reescrevendo `views.py`:
+
+```python
+(...)
+from django.shortcuts import render, get_object_or_404
+(...)
+def detail(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    return render(request, 'cardapio/detail.html', {'category': category})
+(...)
+```
+
+~~sub-section~~
+
+Reescrevendo o template `detail.html`:
+
+```html
+<h1>{{ category.name }}</h1>
+<ul>
+{% for p in category.product_set.all %}
+    <li>{{ p.name }}</li>
+{% endfor %}
+</ul>
+```
+
+![Django Views](./img/screen_django_view_04.png "Django Views")
 
 ~~sub-section~~
 
