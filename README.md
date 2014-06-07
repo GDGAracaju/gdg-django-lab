@@ -45,19 +45,23 @@
 	- Banco de dados (utlização/API)
 	- Admin!
 	- Editando o admin (opções para modelos)
-	- Template
-		- Loops for, contador, primeiro e último
-		- Includes
+	- Templates
 - Aprimoramentos
 	- Django shortcuts: get_object_or_404
 	- URL com parâmetros
-	- Autenticação
-	- Instalando módulos de terceiros
-	- Django forms
-		- Form.as_p
-		- Form.is_valid
+	- E depois?
 - Publicação
 	- Publicando no Heroku
-	- Publicando no App Engine
-	- Publicando em seu servidor
-- E depois?
+
+##Adicionar:
+
+- Autenticação
+- Instalando módulos de terceiros
+- Django forms
+	- Form.as_p
+	- Form.is_valid
+- Publicando no App Engine
+- Publicando em seu servidor
+- Templates
+	- Loops for, contador, primeiro e último
+	- Includes
