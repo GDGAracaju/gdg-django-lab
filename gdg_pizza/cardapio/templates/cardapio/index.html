@@ -1,9 +1,13 @@
-{% if latest_category_list %}
-    <ul>
-    {% for category in latest_category_list %}
-        <li><a href="{% url 'cardapio:detail' category.id %}">{{ category.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Nenhuma categoria disponível.</p>
-{% endif %}
+{% extends "cardapio/base.html" %}
+
+{% block content %}
+	{% if latest_category_list %}
+	    <ul>
+	    {% for category in latest_category_list %}
+	        <li><a href="{% url 'cardapio:detail' category.id %}">{{ category.name }}</a></li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>Nenhuma categoria disponível.</p>
+	{% endif %}
+{% endblock %}
