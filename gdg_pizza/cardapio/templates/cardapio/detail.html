@@ -1,10 +1,19 @@
 {% extends "cardapio/base.html" %}
 
+{% block jumbo %}
+	{{ category.name }}
+{% endblock %}
+
+{% block below_jumbo %}
+	<a href="{% url 'cardapio:cardapio_index' %}">Voltar</a>
+{% endblock %}
+
 {% block content %}
-	<h1>{{ category.name }}</h1>
-	<ul>
+	<div class="row">
 	{% for p in category.product_set.all %}
-	    <li>{{ p.name }}</li>
+	    <div class="col-md-4">
+	    	<h2>{{ p.name }}</h2>
+	    </div>
 	{% endfor %}
-	</ul>
+	</div>
 {% endblock %}

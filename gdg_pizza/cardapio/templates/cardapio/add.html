@@ -1,0 +1,21 @@
+{% extends "cardapio/base.html" %}
+
+{% block jumbo %}
+Adiciona categoria
+{% endblock %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form role="form" action="{% url 'cardapio:add_category' %}" method="post">
+{% csrf_token %}
+    <div class="form-group">
+    	<label for="category">Nome</label>
+    	<input type="text"  name="category" id="category" value="" class="form-control"/>
+    </div>
+    
+	<input type="submit" value="Adiciona" class="btn btn-default"/>
+</form>
+
+{% endblock %}

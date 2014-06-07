@@ -1,13 +1,27 @@
 {% extends "cardapio/base.html" %}
 
+{% block jumbo %}
+	GDG Pizza!
+{% endblock %}
+
+{% block below_jumbo %}
+	<p>Escolha uma categoria</p>
+{% endblock %}
+
 {% block content %}
+	<div class="row">
 	{% if latest_category_list %}
-	    <ul>
+	    
 	    {% for category in latest_category_list %}
-	        <li><a href="{% url 'cardapio:detail' category.id %}">{{ category.name }}</a></li>
+	        <div class="col-md-4">
+	        	<h2><a href="{% url 'cardapio:detail' category.id %}">{{ category.name }}</a></h2>
+	        </div>
 	    {% endfor %}
-	    </ul>
+	    
 	{% else %}
-	    <p>Nenhuma categoria disponível.</p>
+		<div class="col-md-4">
+	    	<p>Nenhuma categoria disponível.</p>
+	    </div>
 	{% endif %}
+	</div>
 {% endblock %}
