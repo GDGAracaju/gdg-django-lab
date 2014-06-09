@@ -1,19 +1,29 @@
-#gdg-django-lab
+#GDG-Django-Lab
 
-##Requisitos
+Esse repositório contém todo o material desenvolvido para a apresentação [Django Lab](http://b.erickmendonca.com.br/django). Está organizado em duas branches:
+ - **master**: contém o código desenvolvido passo-a-passo.
+ - **gh-pages**: contém a apresentação que apresenta o Django e descreve a criação da aplicação. [Acessível aqui.](http://erickmendonca.github.io/gdg-django-lab)
+
+Se você não participou do evento, pode acompanhar os slides enquanto navega pelo código!
+
+##Requisitos para rodar localmente
 - Instale Git
 - Instale Python
-- Instale pip (?)
-- Instale Virtualenv
+- Instale pip
+- Instale Django
+- Opcionalmente, instale Virtualenv
 
-##Passos
-- ~~Clone repositório~~
-- ~~Crie virtualenv venv~~
-- ~~Windows: activate .bat || Linux: activate~~
+[**Ou então use o Nitrous.IO**: lá você consegue um ambiente virtual pronto para usar!](https://www.nitrous.io/join/W6W26grfbdM)
+
+##Para brincar com o código:
+- Clone repositório
 
 **OU**
+
 - Apenas clique: [![Hack erickmendonca/gdg-django-lab on Nitrous.IO](https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e71372f6045e1949af9d96095b.png)](https://www.nitrous.io/hack_button?source=embed&runtime=django&repo=erickmendonca%2Fgdg-django-lab&file_to_open=README.md) :-)
 
+
+##Tópicos
 - Aplicações Web
 - Introdução ao Django
 	- Quem usa Django
@@ -53,7 +63,7 @@
 - Publicação
 	- Publicando no Heroku
 
-##Adicionar:
+##Futuro:
 
 - Autenticação
 - Instalando módulos de terceiros
