@@ -80,26 +80,24 @@ Dêem uma [olhada neste template](http://getbootstrap.com/examples/jumbotron/), 
 
 Copie e cole o código do template no `base.html` e depois edite:
 
-```html
+```
 (...)
-<title>{% block title %}Jumbotron Template for Bootstrap{% endblock %}</title>
-<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+< title>{% block title %}Jumbotron Template for Bootstrap{% endblock %}< /title>
+< link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" >
 (...)
-<div class="container">
-
+< div class="container">
       {% block content %}
 (...)
 {% endblock %}
-
-      <hr>
-
-      <footer>
+      < hr>
+      < footer>
         <p>&copy; Company 2014</p>
-      </footer>
+      < /footer>
 (...)
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+< script src="{% static "js/bootstrap.min.js" %}">< /script>
 (...)
 ```
+
 
 ~~sub-section~~
 
